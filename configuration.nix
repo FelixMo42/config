@@ -11,6 +11,8 @@ in {
 
 	# Set up shell
 	programs.fish.enable = true;
+	programs.fish.shellInit = builtins.readFile ./fish/init.fish;
+	programs.fish.promptInit = builtins.readFile ./fish/prompt.fish;
 	users.users.felix = {
 		shell = pkgs.fish;
 	};
@@ -86,9 +88,7 @@ in {
 		dmenu
 		git
 		htop
-		fish
 		dwm-status
-		upower
 	];
 
 	# Install fonts
