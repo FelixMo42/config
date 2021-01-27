@@ -9,6 +9,12 @@ in {
 			./hardware-configuration.nix
 		];
 
+	# Set up shell
+	programs.fish.enable = true;
+	users.users.felix = {
+		shell = pkgs.fish;
+	};
+
 	# Use the systemd-boot EFI boot loader.
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
@@ -80,7 +86,7 @@ in {
 		dmenu
 		git
 		htop
-
+		fish
 		dwm-status
 		upower
 	];
