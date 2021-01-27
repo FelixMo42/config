@@ -1,9 +1,18 @@
-{ lib, stdenv, fetchurl, pkg-config, writeText, libX11, ncurses, libXft } :
+{ lib, stdenv, fetchurl, fetchpatch, pkg-config, writeText, libX11, ncurses, libXft } :
 
 with lib;
 
 let
-	patches = [];
+	patches = [
+		(fetchpatch {
+			url = "https://st.suckless.org/patches/anysize/";
+			sha256 = "";
+		})
+		(fetchpatch {
+			url = "https://st.suckless.org/patches/universcroll/st-universcroll-0.8.4.diff";
+			sha256 = "";
+		})
+	];
 in stdenv.mkDerivation rec {
 	pname = "st";
 	version = "0.8.4";

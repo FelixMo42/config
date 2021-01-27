@@ -1,10 +1,15 @@
-{lib, stdenv, fetchurl, libX11, libXinerama, libXft, writeText}:
+{lib, stdenv, fetchurl, fetchpatch, libX11, libXinerama, libXft, writeText}:
 
 with lib;
 
 let
 	name = "dwm-6.2";
-	patches = [];
+	patches = [
+		(fetchpatch {
+			url = "https://dwm.suckless.org/patches/notitle/dwm-notitle-6.2.diff";
+			sha256 = "0hfmxblpzaxzcggvmil79wggqca27sli1qj0xwwqivs4vkp3d70l";
+		})
+	];
 in stdenv.mkDerivation {
 	inherit name;
 
