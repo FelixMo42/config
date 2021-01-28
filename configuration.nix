@@ -81,14 +81,23 @@ in {
 
 	# Install packages
 	environment.systemPackages = with pkgs; [
+		# desktop enviroment
+		dwm
+		dmenu
+		dwm-status
+
+		# applications
 		neovim
 		firefox
 		st
-		dwm
-		dmenu
+
+		# languages
+		rustup
+		jdk11
+
+		# utility
 		git
 		htop
-		dwm-status
 	];
 
 	# Install fonts
