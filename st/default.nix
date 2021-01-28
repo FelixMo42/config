@@ -5,12 +5,8 @@ with lib;
 let
 	patches = [
 		(fetchpatch {
-			url = "https://st.suckless.org/patches/anysize/";
-			sha256 = "";
-		})
-		(fetchpatch {
-			url = "https://st.suckless.org/patches/universcroll/st-universcroll-0.8.4.diff";
-			sha256 = "";
+			url = "https://st.suckless.org/patches/anysize/st-anysize-0.8.1.diff";
+			sha256 = "14iamv53dc4pljyg0vaz07ksq8xgjc55xn7cn0zn590ah2xq23jy";
 		})
 	];
 in stdenv.mkDerivation rec {
