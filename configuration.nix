@@ -3,19 +3,24 @@
 let
 	dwm = pkgs.callPackage ./dwm {};
 	st = pkgs.callPackage ./st {};
+	neovim = pkgs.callPackage ./nvim {};
 in {
 	imports =
 		[ # Include the results of the hardware scan.
 			./hardware-configuration.nix
 		];
 
+    # allow closed source software
+    nixpkgs.config.allowUnfree = true;
+
+    # 
+    environment.variables.EDITOR = "nvim";
+
 	# Set up shell
 	programs.fish.enable = true;
 	programs.fish.shellInit = builtins.readFile ./fish/init.fish;
 	programs.fish.promptInit = builtins.readFile ./fish/prompt.fish;
-	users.users.felix = {
-		shell = pkgs.fish;
-	};
+	users.users.felix = { shell = pkgs.fish; };
 
 	# Use the systemd-boot EFI boot loader.
 	boot.loader.systemd-boot.enable = true;
@@ -35,40 +40,26 @@ in {
 		keyMap = "us";
 	};
 
-	# Enable the desktop environment.
-	services.xserver.enable = true;
-	services.xserver.desktopManager.xterm.enable = false;
-	services.xserver.displayManager.lightdm.enable = true;
-	services.xserver.windowManager.session = [{
-		name = "dwm";
-		start = "${dwm}/bin/dwm & waitPID=$!";
-	}];
+    # Set up desktop
+    programs.sway = {
+        enable = true;
+        extraPackages = with pkgs; [
+            swaylock
+            swayidle
+            wl-clipboard
+            mako
+            alacritty
+            dmenu
+        ];
+    };
 
-	# Make a nicer status bar
-	systemd.user.services.dwm-status = {
-		description = "dwm status";
-		
-		serviceConfig.ExecStart =
-			let configFile = pkgs.writeText "dwm-status.toml" (builtins.readFile ./dwm/status.toml);
-			in "${pkgs.dwm-status}/bin/dwm-status ${configFile}";
-
-		wantedBy = [ "graphical-session.target" ];
-		partOf   = [ "graphical-session.target" ];
-	};
-
-	# Configure keymap in X11
-	services.xserver.layout = "us";
-	services.xserver.xkbOptions = "eurosign:e";
-
-	# Enable CUPS to print documents.
-	services.printing.enable = true;
+    environment.etc = {
+        "sway/config".source = ./sway/config;
+    };
 
 	# Enable sound.
 	sound.enable = true;
 	hardware.pulseaudio.enable = true;
-
-	# Enable touchpad support.
-	services.xserver.libinput.enable = true;
 
 	# Define a user account.
 	users.users.felix = {
@@ -81,24 +72,22 @@ in {
 
 	# Install packages
 	environment.systemPackages = with pkgs; [
-		# desktop enviroment
-		dwm
-		dmenu
-		dwm-status
-
 		# applications
 		neovim
-		firefox
-		st
+		firefox-wayland
+        vscode
+        discord
+        zoom-us
 
 		# languages
 		rustup
 		jdk11
+		rnix-lsp
 
 		# utility
 		git
 		htop
-	];
+    ];
 
 	# Install fonts
 	fonts.fonts = with pkgs; [

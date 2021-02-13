@@ -1,0 +1,30 @@
+" configure indentation
+filetype indent on
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set noexpandtab
+set smartindent
+set smarttab
+
+" add line numbers
+set relativenumber relativenumber
+
+" enable syntax highlighting
+filetype plugin on
+syntax on
+
+" lsp settings
+set hidden
+
+" activate language servers
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {
+		\ 'rust' : ['rustup', 'run', 'stable', 'rls'],
+		\ 'java' : ['java-lsp.sh'],
+		\ 'nix'  : ['rnix-lsp']
+\ }
+
+
+
+
