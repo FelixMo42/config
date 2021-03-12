@@ -3,28 +3,33 @@ filetype indent on
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set noexpandtab
+set expandtab
 set smartindent
-set smarttab
+set autoindent
 
 " add line numbers
-set relativenumber relativenumber
+set relativenumber number
 
 " enable syntax highlighting
 filetype plugin on
-syntax on
 
-" lsp settings
+" keep buffer open and disable backups
 set hidden
+set nobackup
+set nowritebackup
 
-" activate language servers
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_serverCommands = {
-		\ 'rust' : ['rustup', 'run', 'stable', 'rls'],
-		\ 'java' : ['java-lsp.sh'],
-		\ 'nix'  : ['rnix-lsp']
-\ }
+" enable mouse
+set mouse=a
 
+" configure autocompletion
+set completeopt=menuone,noinsert
 
+" setup themeing
+colorscheme gruvbox
+set laststatus=1
+set showtabline=2
+set nohlsearch
+set scrolloff=8
+set signcolumn=yes
 
-
+set whichwrap+=<,>,h,l,[,] " allow cursor to wrap

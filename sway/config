@@ -5,15 +5,12 @@ set $mod Mod1
 set $tty alacritty
 set $web firefox
 
-# Set application launcher
-set $menu dmenu
-
 # Application keybindings
 bindsym $mod+t exec $tty
 bindsym $mod+w exec $web
 
 # Open menu
-bindsym $mod+Space exec $menu
+bindsym $mod+Space exec --no-startup-id wofi --show run -p "shell:" -L10
 
 # Kills current window
 bindsym $mod+q kill

@@ -13,13 +13,10 @@ in {
     # allow closed source software
     nixpkgs.config.allowUnfree = true;
 
-    # 
-    environment.variables.EDITOR = "nvim";
-
 	# Set up shell
 	programs.fish.enable = true;
 	programs.fish.shellInit = builtins.readFile ./fish/init.fish;
-	programs.fish.promptInit = builtins.readFile ./fish/prompt.fish;
+    programs.fish.promptInit = builtins.readFile ./fish/prompt.fish;
 	users.users.felix = { shell = pkgs.fish; };
 
 	# Use the systemd-boot EFI boot loader.
@@ -31,7 +28,7 @@ in {
 	networking.networkmanager.enable = true; # Enables wireless support via wpa_supplicant.
 
 	# Set your time zone.
-	time.timeZone = "America/Los_Angles";
+	time.timeZone = "America/Los_Angeles";
 
 	# Select internationalisation properties.
 	i18n.defaultLocale = "en_US.UTF-8";
@@ -44,12 +41,8 @@ in {
     programs.sway = {
         enable = true;
         extraPackages = with pkgs; [
-            swaylock
-            swayidle
-            wl-clipboard
-            mako
-            alacritty
-            dmenu
+          wofi
+          alacritty
         ];
     };
 
@@ -73,7 +66,7 @@ in {
 	# Install packages
 	environment.systemPackages = with pkgs; [
 		# applications
-		neovim
+		neovim amp
 		firefox-wayland
         vscode
         discord
@@ -81,12 +74,21 @@ in {
 
 		# languages
 		rustup
-		jdk11
-		rnix-lsp
+        jdk11
+        maven
+        python3
+        nodejs
+        cmake
 
 		# utility
 		git
-		htop
+        lazygit
+        htop
+        fzf
+        ripgrep
+        tokei
+        exa
+        dblatex
     ];
 
 	# Install fonts
