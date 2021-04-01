@@ -38,14 +38,7 @@ in {
 	};
 
     # Set up desktop
-    programs.sway = {
-        enable = true;
-        extraPackages = with pkgs; [
-          wofi
-          alacritty
-        ];
-    };
-
+    programs.sway.enable = true;
     environment.etc = {
         "sway/config".source = ./sway/config;
     };
@@ -65,30 +58,34 @@ in {
 
 	# Install packages
 	environment.systemPackages = with pkgs; [
-		# applications
-		neovim amp
+		# web browser
 		firefox-wayland
-        vscode
-        discord
-        zoom-us
+
+        # terminal
+        alacritty
+
+        # terminal editors
+        neovim
+        amp
 
 		# languages
-		rustup
-        jdk11
+		rustup  # rust
+        jdk11   # java
         maven
-        python3
-        nodejs
-        cmake
+        python3 # python
+        nodejs  # js
+        cmake   # c/c++
+        dblatex # latex
 
-		# utility
-		git
+		# project mangment
+		git 
         lazygit
-        htop
-        fzf
-        ripgrep
         tokei
-        exa
-        dblatex
+
+        # system utility
+        ripgrep 
+        fzf
+        htop 
     ];
 
 	# Install fonts
@@ -96,11 +93,7 @@ in {
 		nerdfonts
 	];
 
-	# This value determines the NixOS release from which the default
-	# settings for stateful data, like file locations and database versions
-	# on your system were taken. It‘s perfectly fine and recommended to leave
-	# this value at the release version of the first install of this system.
-	# Before changing this value read the documentation for this option
-	system.stateVersion = "20.09"; # Did you read the comment?
+    # Nixos version
+	system.stateVersion = "20.09";
 }
 

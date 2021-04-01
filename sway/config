@@ -9,20 +9,24 @@ set $web firefox
 bindsym $mod+t exec $tty
 bindsym $mod+w exec $web
 
-# Open menu
-bindsym $mod+Space exec --no-startup-id wofi --show run -p "shell:" -L10
+# split
+bindsym $mod+d split h
+bindsym $mod+s split v
 
 # Kills current window
 bindsym $mod+q kill
 
+# exit sway
+bindsym $mod+Shift+q exit
+
 # Fullscreen
-bindsym $mod+f fullscreen toggle global
+bindsym $mod+f fullscreen toggle
 
 # Resize
-bindsym $mod+h resize shrink width 20px
+bindsym $mod+h resize shrink width  20px
 bindsym $mod+k resize grow   height 20px
 bindsym $mod+j resize shrink height 20px
-bindsym $mod+l resize grow   width 20px
+bindsym $mod+l resize grow   width  20px
 
 # Disable border and no title
 default_border none
