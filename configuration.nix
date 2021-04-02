@@ -1,17 +1,12 @@
 { config, pkgs, ... } :
 
 let
-	dwm = pkgs.callPackage ./dwm {};
-	st = pkgs.callPackage ./st {};
-	neovim = pkgs.callPackage ./nvim {};
+    nvim = pkgs.callPackage ./nvim {};
 in {
 	imports =
 		[ # Include the results of the hardware scan.
 			./hardware-configuration.nix
 		];
-
-    # allow closed source software
-    nixpkgs.config.allowUnfree = true;
 
 	# Set up shell
 	programs.fish.enable = true;
@@ -37,12 +32,6 @@ in {
 		keyMap = "us";
 	};
 
-    # Set up desktop
-    programs.sway.enable = true;
-    environment.etc = {
-        "sway/config".source = ./sway/config;
-    };
-
 	# Enable sound.
 	sound.enable = true;
 	hardware.pulseaudio.enable = true;
@@ -56,16 +45,20 @@ in {
 		];
 	};
 
+    # Set up config
+    programs.sway.enable = true;
+    environment.etc = {
+        "sway/config".source = ./sway/config;
+    };
+
 	# Install packages
 	environment.systemPackages = with pkgs; [
-		# web browser
+		# applications
 		firefox-wayland
-
-        # terminal
         alacritty
 
         # terminal editors
-        neovim
+        nvim
         amp
 
 		# languages
@@ -77,12 +70,10 @@ in {
         cmake   # c/c++
         dblatex # latex
 
-		# project mangment
-		git 
+        # utility
+        git
         lazygit
         tokei
-
-        # system utility
         ripgrep 
         fzf
         htop 
