@@ -54,29 +54,28 @@ in {
 	# Install packages
 	environment.systemPackages = with pkgs; [
 		# applications
-		firefox-wayland
-        alacritty
+		firefox-wayland # browser
+        alacritty       # terminal
+        krita           # art tool
 
-        # terminal editors
-        nvim
-        amp
+        # terminal applications
+        nvim    # editor
+        htop    # system utility
+        lazygit # git viewer
+        fzf     # file searcher
+
+        # utility
+        git     # version controlle
+        tokei   # project line counter
+        ripgrep # better grep
 
 		# languages
 		rustup  # rust
         jdk11   # java
-        maven
         python3 # python
         nodejs  # js
         cmake   # c/c++
         dblatex # latex
-
-        # utility
-        git
-        lazygit
-        tokei
-        ripgrep 
-        fzf
-        htop 
     ];
 
 	# Install fonts
