@@ -33,7 +33,6 @@ set laststatus=1
 set showtabline=2
 set nohlsearch
 set scrolloff=8
-set signcolumn=yes
 
 " allow cursor to wrap
 set whichwrap+=<,>,h,l,[,] 
